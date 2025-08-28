@@ -1,0 +1,134 @@
+{
+  "workloads": {
+    "fine_tuning_medium_p5": {
+      "name": "Fine-tuning 30B model on 2x P5 H100",
+      "description": "Customer fine-tuning medium model on high-performance instances",
+      "scenario": {
+        "current_instance": "P5",
+        "current_gpu_count": 2,
+        "workload_type": "FINE_TUNING",
+        "model_size": "MEDIUM",
+        "monthly_hours": 200,
+        "use_spot": true,
+        "precision": "fp16"
+      },
+      "expected_outcome": "Cost optimization opportunities with G6e instances",
+      "tags": ["fine_tuning", "medium_model", "cost_optimization"]
+    },
+    "inference_small_p5": {
+      "name": "Serving 13B model on 1x P5 H100",
+      "description": "Customer doing inference on over-provisioned instance",
+      "scenario": {
+        "current_instance": "P5",
+        "current_gpu_count": 1,
+        "workload_type": "INFERENCE",
+        "model_size": "SMALL",
+        "monthly_hours": 720,
+        "use_spot": false,
+        "precision": "fp16"
+      },
+      "expected_outcome": "Significant cost savings with G6/G6e instances",
+      "tags": ["inference", "small_model", "over_provisioned", "cost_reduction"]
+    },
+    "training_large_p4d": {
+      "name": "Training 70B model on 4x P4d A100",
+      "description": "Large model training on previous generation hardware",
+      "scenario": {
+        "current_instance": "P4d",
+        "current_gpu_count": 4,
+        "workload_type": "TRAINING",
+        "model_size": "LARGE",
+        "monthly_hours": 500,
+        "use_spot": true,
+        "precision": "bf16"
+      },
+      "expected_outcome": "Performance upgrade opportunities with P5/P6",
+      "tags": ["training", "large_model", "performance_upgrade"]
+    },
+    "inference_massive_p5e": {
+      "name": "Serving 140B model on 2x P5e H200",
+      "description": "Enterprise serving massive model with high memory requirements",
+      "scenario": {
+        "current_instance": "P5e",
+        "current_gpu_count": 2,
+        "workload_type": "INFERENCE",
+        "model_size": "MASSIVE",
+        "monthly_hours": 720,
+        "use_spot": false,
+        "precision": "int8"
+      },
+      "expected_outcome": "Memory optimization and potential cost savings",
+      "tags": ["inference", "massive_model", "enterprise", "memory_intensive"]
+    },
+    "batch_inference_g5": {
+      "name": "Batch processing on 4x G5 A10G",
+      "description": "Batch inference workload on mid-tier GPU instances",
+      "scenario": {
+        "current_instance": "G5",
+        "current_gpu_count": 4,
+        "workload_type": "INFERENCE",
+        "model_size": "MEDIUM",
+        "monthly_hours": 200,
+        "use_spot": true,
+        "precision": "int8"
+      },
+      "expected_outcome": "Cost and performance optimization with newer instances",
+      "tags": ["batch_processing", "medium_model", "spot_instances"]
+    },
+    "research_training_g6e": {
+      "name": "Research training on 2x G6e L40S",
+      "description": "Academic research fine-tuning with budget constraints",
+      "scenario": {
+        "current_instance": "G6e",
+        "current_gpu_count": 2,
+        "workload_type": "FINE_TUNING",
+        "model_size": "SMALL",
+        "monthly_hours": 100,
+        "use_spot": true,
+        "precision": "fp16"
+      },
+      "expected_outcome": "Further cost optimization opportunities",
+      "tags": ["research", "academic", "budget_constrained", "small_model"]
+    },
+    "production_serving_g4dn": {
+      "name": "Production API serving on 8x G4dn T4",
+      "description": "Legacy production deployment needing modernization",
+      "scenario": {
+        "current_instance": "G4dn",
+        "current_gpu_count": 8,
+        "workload_type": "INFERENCE",
+        "model_size": "SMALL",
+        "monthly_hours": 720,
+        "use_spot": false,
+        "precision": "int8"
+      },
+      "expected_outcome": "Significant consolidation and cost reduction opportunities",
+      "tags": ["production", "legacy", "modernization", "consolidation"]
+    }
+  },
+  "workload_sets": {
+    "basic_demos": [
+      "fine_tuning_medium_p5",
+      "inference_small_p5"
+    ],
+    "comprehensive_suite": [
+      "fine_tuning_medium_p5",
+      "inference_small_p5",
+      "training_large_p4d",
+      "inference_massive_p5e"
+    ],
+    "cost_optimization_focus": [
+      "inference_small_p5",
+      "batch_inference_g5",
+      "production_serving_g4dn"
+    ],
+    "performance_focus": [
+      "training_large_p4d",
+      "inference_massive_p5e"
+    ],
+    "research_academic": [
+      "research_training_g6e",
+      "batch_inference_g5"
+    ]
+  }
+}

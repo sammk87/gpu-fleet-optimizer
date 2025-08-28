@@ -1,0 +1,182 @@
+{
+  "model_sizes": {
+    "small": {
+      "name": "Small",
+      "description": "1-13B parameters",
+      "parameter_count_billion": 13,
+      "typical_use_cases": ["inference", "fine_tuning", "experimentation"],
+      "memory_overhead_multiplier": 1.5,
+      "examples": ["Llama 2 7B", "Mistral 7B", "CodeLlama 7B"]
+    },
+    "medium": {
+      "name": "Medium", 
+      "description": "14-70B parameters",
+      "parameter_count_billion": 35,
+      "typical_use_cases": ["inference", "fine_tuning", "production_serving"],
+      "memory_overhead_multiplier": 1.5,
+      "examples": ["Llama 2 70B", "CodeLlama 34B", "Mixtral 8x7B"]
+    },
+    "large": {
+      "name": "Large",
+      "description": "70B+ parameters", 
+      "parameter_count_billion": 70,
+      "typical_use_cases": ["inference", "fine_tuning", "research"],
+      "memory_overhead_multiplier": 1.6,
+      "examples": ["Llama 2 70B", "Claude-style models", "GPT-3.5 equivalent"]
+    },
+    "massive": {
+      "name": "Massive",
+      "description": "100B+ parameters",
+      "parameter_count_billion": 140,
+      "typical_use_cases": ["inference", "research", "enterprise_applications"],
+      "memory_overhead_multiplier": 1.7,
+      "examples": ["GPT-4 class models", "PaLM 2", "Claude-2 equivalent"]
+    }
+  },
+  "precision_formats": {
+    "fp32": {
+      "name": "FP32 (Full Precision)",
+      "bytes_per_parameter": 4.0,
+      "description": "Highest accuracy, largest memory footprint",
+      "use_cases": ["research", "baseline_training"],
+      "performance_impact": 1.0
+    },
+    "fp16": {
+      "name": "FP16 (Half Precision)",
+      "bytes_per_parameter": 2.0,
+      "description": "Good accuracy-memory balance, widely supported",
+      "use_cases": ["training", "inference", "fine_tuning"],
+      "performance_impact": 0.95
+    },
+    "bf16": {
+      "name": "BF16 (Brain Float 16)",
+      "bytes_per_parameter": 2.0,
+      "description": "Better numerical stability than FP16",
+      "use_cases": ["training", "fine_tuning"],
+      "performance_impact": 0.95
+    },
+    "fp8": {
+      "name": "FP8 (8-bit Float)",
+      "bytes_per_parameter": 1.0,
+      "description": "Experimental format for inference optimization",
+      "use_cases": ["inference", "edge_deployment"],
+      "performance_impact": 0.85
+    },
+    "int8": {
+      "name": "INT8 (8-bit Integer)",
+      "bytes_per_parameter": 1.0,
+      "description": "Quantized format for inference",
+      "use_cases": ["inference", "edge_deployment", "cost_optimization"],
+      "performance_impact": 0.80
+    }
+  },
+  "workload_types": {
+    "training": {
+      "name": "Training",
+      "description": "Full model training from scratch",
+      "memory_requirements": "highest",
+      "compute_intensity": "very_high",
+      "typical_duration": "days_to_weeks",
+      "key_factors": ["interconnect_bandwidth", "memory_capacity", "compute_throughput"],
+      "recommended_instance_families": ["P"]
+    },
+    "fine_tuning": {
+      "name": "Fine-tuning",
+      "description": "Adapting pre-trained models to specific tasks",
+      "memory_requirements": "high", 
+      "compute_intensity": "high",
+      "typical_duration": "hours_to_days",
+      "key_factors": ["memory_capacity", "compute_throughput", "cost_efficiency"],
+      "recommended_instance_families": ["P", "G6e"]
+    },
+    "inference": {
+      "name": "Inference",
+      "description": "Running trained models for predictions",
+      "memory_requirements": "moderate",
+      "compute_intensity": "moderate",
+      "typical_duration": "continuous",
+      "key_factors": ["cost_per_token", "latency", "throughput"],
+      "recommended_instance_families": ["G6", "G6e", "P"]
+    }
+  },
+  "use_cases": {
+    "research_training": {
+      "name": "Research & Experimentation",
+      "workload_type": "training",
+      "priority": "performance",
+      "cost_sensitivity": "medium",
+      "spot_instance_suitable": true,
+      "description": "Academic research, model experimentation"
+    },
+    "production_training": {
+      "name": "Production Model Training", 
+      "workload_type": "training",
+      "priority": "reliability",
+      "cost_sensitivity": "high",
+      "spot_instance_suitable": false,
+      "description": "Enterprise model development, scheduled training jobs"
+    },
+    "fine_tuning_development": {
+      "name": "Development Fine-tuning",
+      "workload_type": "fine_tuning",
+      "priority": "cost",
+      "cost_sensitivity": "high", 
+      "spot_instance_suitable": true,
+      "description": "Prototyping, experimentation, development workflows"
+    },
+    "fine_tuning_production": {
+      "name": "Production Fine-tuning",
+      "workload_type": "fine_tuning",
+      "priority": "balance",
+      "cost_sensitivity": "medium",
+      "spot_instance_suitable": false,
+      "description": "Production model customization, enterprise fine-tuning"
+    },
+    "high_volume_inference": {
+      "name": "High-Volume Inference",
+      "workload_type": "inference",
+      "priority": "cost",
+      "cost_sensitivity": "very_high",
+      "spot_instance_suitable": false,
+      "description": "Production API serving, batch processing"
+    },
+    "interactive_inference": {
+      "name": "Interactive Inference", 
+      "workload_type": "inference",
+      "priority": "latency",
+      "cost_sensitivity": "medium",
+      "spot_instance_suitable": false,
+      "description": "Chatbots, real-time applications, user-facing services"
+    },
+    "batch_inference": {
+      "name": "Batch Inference",
+      "workload_type": "inference", 
+      "priority": "throughput",
+      "cost_sensitivity": "high",
+      "spot_instance_suitable": true,
+      "description": "Offline processing, data pipeline, batch jobs"
+    }
+  },
+  "recommendation_weights": {
+    "cost_optimization": {
+      "cost_savings": 0.6,
+      "performance": 0.2,
+      "reliability": 0.2
+    },
+    "performance_optimization": {
+      "cost_savings": 0.2,
+      "performance": 0.6,
+      "reliability": 0.2
+    },
+    "balanced": {
+      "cost_savings": 0.33,
+      "performance": 0.33,
+      "reliability": 0.34
+    },
+    "reliability_first": {
+      "cost_savings": 0.2,
+      "performance": 0.3,
+      "reliability": 0.5
+    }
+  }
+}
